@@ -22,5 +22,6 @@ export const environment = {
     { value: 'Road', viewValue: 'Bing Roads', layerType: 'Bing' },
     { value: 'Aerial', viewValue: 'Bing Aerial', layerType: 'Bing' },
     { value: 'AerialWithLabels', viewValue: 'Bing Aerial With Labels', layerType: 'Bing' },
-  ]
+  ],
+  graceHost: ''
 };

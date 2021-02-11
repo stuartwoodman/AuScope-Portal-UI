@@ -12,8 +12,8 @@ export const environment = {
   production: false,
   getCSWRecordUrl: 'getKnownLayers.do',
   getCustomLayers: 'getCustomLayers.do',
-  //portalBaseUrl: 'http://localhost:8080/AuScope-Portal/', 
-  portalBaseUrl: 'https://au-portal-dev.it.csiro.au/api/',
+  portalBaseUrl: 'http://localhost:8080/',
+  //portalBaseUrl: 'https://au-portal-dev.it.csiro.au/api/',
   hostUrl: 'http://localhost:4200/index.htm',
   nVCLAnalyticalUrl: 'https://aus-analytical.it.csiro.au/NVCLAnalyticalServices/',
   googleAnalyticsKey: null,
@@ -37,7 +37,6 @@ export const environment = {
     { value: 't', viewValue: 'Google Terrain', layerType: 'Google' },
     { value: 'p', viewValue: 'Google Terrain & Roads', layerType: 'Google' },
     { value: 'r', viewValue: 'Google Road without Building', layerType: 'Google' }
-  ]
+  ],
+  graceHost: 'https://insargrace.geoanalytics.csiro.au/grace'
 };
-
-

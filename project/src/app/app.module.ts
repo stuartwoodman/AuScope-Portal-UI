@@ -31,12 +31,9 @@ import { OlMapZoomComponent } from './openlayermap/olmap.zoom.component';
 import { NgbdModalStatusReportComponent } from './toppanel/renderstatus/renderstatus.component';
 import { OlMapClipboardComponent } from './openlayermap/olmap.clipboard.component';
 
-
-
 import { NotificationComponent } from './toppanel/notification/notification.component';
 import { QuerierModalComponent } from './modalwindow/querier/querier.modal.component';
 import { ClipboardModule } from 'ngx-clipboard';
-
 
 import { PortalCoreModule } from 'portal-core-ui';
 import { PortalCorePipesModule } from 'portal-core-ui';
@@ -55,12 +52,14 @@ import { OlmapBaselayerselectorComponent } from './openlayermap/olmap.baselayers
 import { DisclaimerModalComponent } from './modalwindow/disclaimer/disclaimer.modal.component';
 import { PortalDetailsPanelComponent } from './menupanel/portal-details-panel/portal-details-panel.component';
 
-import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MSCLComponent } from './modalwindow/querier/customanalytic/mscl/mscl.component';
 import { MSCLAnalyticComponent } from './modalwindow/layeranalytic/mscl/mscl.analytic.component';
 
+import { KeywordComponentService } from './services/keywordcomponent/keyword-component.service';
+import { GraceModule } from './modules/grace/grace.module';
 
 import { PlotlyViaCDNModule } from 'angular-plotly.js';
 
@@ -104,7 +103,9 @@ PlotlyViaCDNModule.plotlyBundle = 'basic';
     MSCLComponent,
     MSCLAnalyticComponent
   ],
-  providers: [],
+  providers: [
+    KeywordComponentService
+  ],
   imports: [
     PortalCoreModule.forRoot(environment, config),
     PortalCorePipesModule,
@@ -122,7 +123,9 @@ PlotlyViaCDNModule.plotlyBundle = 'basic';
     NgxChartsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
-    CommonModule, PlotlyViaCDNModule
+    CommonModule,
+    PlotlyViaCDNModule,
+    GraceModule
   ],
   entryComponents: [
     NgbdModalStatusReportComponent,

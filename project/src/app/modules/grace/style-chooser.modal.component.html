@@ -1,0 +1,52 @@
+<form [formGroup]="styleGroup" (ngSubmit)="onSubmit()">
+    <div class="modal-header"><!--style="background: #EEE">-->
+        <h5 class="modal-title">Layer Style</h5>
+        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+     <!-- TODO: Check numeric values or restrict entry to numeric values -->     
+    <div class="modal-body style-modal">
+        <div class="row">
+            <div class="col">Upper Bound<br>
+                <input id="maxValue" type="text" formControlName="maxValue">&nbsp;(m)&nbsp;<input formControlName="maxColor"
+                    [colorPicker]="styleGroup.get('maxColor').value"
+                    [value]="styleGroup.get('maxColor').value"
+                    [style.background]="styleGroup.get('maxColor').value"
+                    (colorPickerChange)="styleGroup.get('maxColor').setValue($event)"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">Neutral<br>
+                <input id="neutralValue" type="text" formControlName="neutralValue">&nbsp;(m)&nbsp;<input formControlName="neutralColor"
+                    [colorPicker]="styleGroup.get('neutralColor').value"
+                    [value]="styleGroup.get('neutralColor').value"
+                    [style.background]="styleGroup.get('neutralColor').value"
+                    (colorPickerChange)="styleGroup.get('neutralColor').setValue($event)"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="font-size:small">
+                <input type="checkbox" formControlName="transparentNeutralColor">&nbsp;Transparent neutral colour
+            </div>
+        </div>
+        <div class="row" *ngIf="styleGroup.controls.transparentNeutralColor.value===true">
+            <div class="col" style="font-size:smaller;color:red;">
+                Slight artefacting between mascons wil occur
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">Lower Bound<br>
+                <input id="minValue" type="text" formControlName="minValue">&nbsp;(m)&nbsp;<input formControlName="minColor"
+                    [colorPicker]="styleGroup.get('minColor').value"
+                    [value]="styleGroup.get('minColor').value"
+                    [style.background]="styleGroup.get('minColor').value"
+                    (colorPickerChange)="styleGroup.get('minColor').setValue($event)"/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer"><!--style="background: #EEE">-->
+        <button type="button" class="btn btn-primary" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!styleGroup.valid">Set</button>
+    </div>
+</form>

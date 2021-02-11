@@ -5,7 +5,7 @@ import { OlMapService } from 'portal-core-ui';
 import { OlClipboardService } from 'portal-core-ui';
 import * as $ from 'jquery';
 import { UtilitiesService } from 'portal-core-ui';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import * as _ from 'lodash';
 import { environment } from '../../../../environments/environment';
 import { ref } from '../../../../environments/ref';
@@ -15,6 +15,7 @@ import { AuMapService } from '../../../services/wcustom/au-map.service';
 import { OlIrisService } from '../../../services/wcustom/iris/ol-iris.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { OlWMSService } from 'portal-core-ui';
+import { KeywordComponentService } from 'app/services/keywordcomponent/keyword-component.service';
 
 declare var gtag: Function;
 
@@ -35,6 +36,9 @@ export class FilterPanelComponent implements OnInit {
   public showAdvanceFilter = false;
   public bApplyClipboardBBox = true;
 
+  // KeywordComponent record buttons
+  @ViewChild('keywordButtons', { static: true, read: ViewContainerRef }) keywordButtonsViewContainer: ViewContainerRef;
+
   constructor(
     private olMapService: OlMapService,
     private layerHandlerService: LayerHandlerService,
@@ -43,7 +47,8 @@ export class FilterPanelComponent implements OnInit {
     private modalService: BsModalService,
     private manageStateService: ManageStateService,
     private olClipboardService: OlClipboardService,
-    private olWMSService: OlWMSService
+    private olWMSService: OlWMSService,
+    private keywordComponentService: KeywordComponentService
   ) {
     this.providers = [];
     this.optionalFilters = [];
@@ -92,6 +97,11 @@ export class FilterPanelComponent implements OnInit {
         me.layer.filterCollection['mandatoryFilters'][0].value = nvclanid;
         me.addLayer(me.layer);
       }
+    }
+
+    // Keyword components
+    if (this.layer.cswRecords.length > 0) {
+      this.keywordComponentService.addFilterButtonKeywordComponents(this.layer.cswRecords[0], this.keywordButtonsViewContainer)
     }
   }
 

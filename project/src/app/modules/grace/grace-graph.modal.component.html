@@ -1,0 +1,34 @@
+<div class="modal-header"><!--style="background: #EEE">-->
+    <h5 class="modal-title">GRACE</h5>
+    <div class="btn-group" dropdown>
+        <button id="parameterDropdownButton" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="parameterDropdownMenu"> <!-- re-add disable -->
+            Select parameter <span class="caret"></span>
+        </button>
+        <ul id="parameterDropdownMenu" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="parameterDropdownButton">
+            <li role="menuitem" *ngFor="let param of availableParameters">
+                <a class="dropdown-item" (click)="parameterChange(param)">{{ param }}</a>
+            </li>
+        </ul>
+    </div>
+    <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div style="text-align:center;" *ngIf="status===QueryStatus.querying">
+        Loading {{ parameter }}...
+        <div class="spinner" style="position:relative;margin-top:100px;">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <div style="text-align:center;" *ngIf="status===QueryStatus.error">
+        Unable to retrieve GRACE data.
+    </div>
+    <plotly-plot *ngIf="status===QueryStatus.loaded"
+        [data]="graph.data" [layout]="graph.layout" [config]="graph.config"></plotly-plot>
+</div>
+<div class="modal-footer"><!--style="background: #EEE">-->
+    <button type="button" class="btn btn-primary" (click)="closeModal()" >Close</button>
+</div>
