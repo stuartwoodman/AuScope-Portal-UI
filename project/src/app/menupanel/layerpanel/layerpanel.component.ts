@@ -220,7 +220,6 @@ export class LayerPanelComponent implements OnInit {
             } else {
               this.clearSearch();
             }
-
         });
     }
 

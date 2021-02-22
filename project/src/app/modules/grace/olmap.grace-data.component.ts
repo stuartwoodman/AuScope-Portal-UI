@@ -49,12 +49,4 @@ export class OlMapGraceDataComponent extends KeywordComponentClass implements Af
         }
     }
 
-    public enabled(): boolean {
-        let enabled = false;
-        if (this.cswRecord !== null) {
-            enabled = this.olMapService.layerExists(this.cswRecord.id)
-        }
-        return enabled;
-    }
-
 }

@@ -1,128 +1,59 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
 import { KeywordComponent } from '../../menupanel/common/filterpanel/keywordcomponent/keyword.component';
-import { AddedKeywordComponent, KeywordComponentType } from '../../menupanel/common/model/keywordcomponent/keywordcomponent.model';
-import { CSWRecordModel } from 'portal-core-ui';
+import { LayerModel } from 'portal-core-ui';
 import { keywordComponents } from '../../../environments/keyword-components';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class KeywordComponentService {
-
-  private mapWidgetViewContainerRef: ViewContainerRef;
-
-  // Added KeywordComponents
-  private mapWidgetKeywordComponents: AddedKeywordComponent[] = [];
-  private filterButtonKeywordComponents: AddedKeywordComponent[] = [];
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
   /**
-   * Set the ViewContainerRef for map widgets
+   * Construct a keyword list from a layer's keywords and CSW record keywords, removing duplicates
    *
-   * @param viewContainerRef map widget ViewContainerRef
+   * @param layer the layer to inspect for keywords
    */
-  public setMapWidgetViewContainerRef(viewContainerRef: ViewContainerRef) {
-    this.mapWidgetViewContainerRef = viewContainerRef;
-  }
-
-  /**
-   * Add any KeywordComponent map widgets if the CSW record contains the corresponding keywords
-   *
-   * @param cswRecord the CSW record
-   */
-  public addMapWidgetKeywordComponents(cswRecord: CSWRecordModel) {
-    if (keywordComponents.hasOwnProperty('keywordComponents')) {
-      for (const keyword of cswRecord.descriptiveKeywords) {
-        const componentsForKeyword: KeywordComponent[] = keywordComponents['keywordComponents'].filter(
-            (c) => c.keyword === keyword);
-        for (const keywordComponentItem of componentsForKeyword) {
-          if (keywordComponentItem.keywordComponentType === KeywordComponentType.MapWidget) {
-            // Map Widgets
-            const addedKeywordComponents: AddedKeywordComponent[] = this.mapWidgetKeywordComponents.filter(
-                (kc) => kc.keywordComponent === keywordComponentItem);
-            if (addedKeywordComponents.length > 0) {
-              // If this widget already exists, just update its CSW record ID list
-              for (const addedComponent of addedKeywordComponents) {
-                addedComponent.cswRecordIds.push(cswRecord.id);
-              }
-            } else {
-              // If it doesn't already exist, add it
-              const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-                keywordComponentItem.keywordComponent
-              );
-              const componentRef: ComponentRef<any> =
-                this.mapWidgetViewContainerRef.createComponent<KeywordComponent>(componentFactory);
-              componentRef.instance.cswRecord = cswRecord;
-
-              const addedKeywordComponent: AddedKeywordComponent = {
-                cswRecordIds: [cswRecord.id],
-                keywordComponent: keywordComponentItem,
-                viewContainerRef: this.mapWidgetViewContainerRef,
-              };
-              this.mapWidgetKeywordComponents.push(addedKeywordComponent);
-            }
+  private buildKeywordList(layer: LayerModel): string[] {
+    let keywordList: string[] = [];
+    // Check layer record for keywords if field is present
+    if (layer.hasOwnProperty('keywords') && layer.keywords.length > 0) {
+      keywordList = layer.keywords;
+    }
+    // Check CSW records (if any) for keywords
+    if (layer.cswRecords.length > 0) {
+      for (const cswRecord of layer.cswRecords) {
+        for (const keyword of cswRecord.descriptiveKeywords) {
+          if (!(keyword in keywordList)) {
+            keywordList.push(keyword);
           }
         }
       }
     }
+    return keywordList;
   }
 
   /**
-   * Add any KeywordComponent filter buttons if the CSW record contains the corresponding keywords
+   * Add any KeywordComponent filter buttons if the layer or its corresponding
+   * CSW recorsd contain predefined keywords
    *
-   * @param cswRecord the CSW record
-   * @param filterButtonsViewContainerRef the ViewContainerRef for the filter panel
+   * @param layer the layer to inspect for keywords
+   * @param filterButtonsViewContainerRef the ViewContainerRef for the filter
+   *          panel the component will be added to
    */
-  public addFilterButtonKeywordComponents(cswRecord: CSWRecordModel, filterButtonsViewContainerRef: ViewContainerRef) {
-    if (keywordComponents.hasOwnProperty('keywordComponents')) {
-      for (const keyword of cswRecord.descriptiveKeywords) {
-        const componentsForKeyword: KeywordComponent[] = keywordComponents['keywordComponents'].filter(
-            (c) => c.keyword === keyword);
+  public addFilterButtonKeywordComponents(layer: LayerModel, filterButtonsViewContainerRef: ViewContainerRef) {
+    if (keywordComponents.hasOwnProperty("keywordComponents")) {
+      const keywordList: string[] = this.buildKeywordList(layer);
+      for (const keyword of keywordList) {
+        const componentsForKeyword: KeywordComponent[] = keywordComponents["keywordComponents"].filter((c) => c.keyword === keyword);
         for (const keywordComponentItem of componentsForKeyword) {
-          if (keywordComponentItem.keywordComponentType === KeywordComponentType.FilterButton) {
-            // Record Buttons
-            const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-              keywordComponentItem.keywordComponent
-            );
-            const componentRef: ComponentRef<any> =
-                filterButtonsViewContainerRef.createComponent<KeywordComponent>(componentFactory);
-            componentRef.instance.cswRecord = cswRecord;
-            const addedKeywordComponent: AddedKeywordComponent = {
-              cswRecordIds: [cswRecord.id],
-              keywordComponent: keywordComponentItem,
-              viewContainerRef: filterButtonsViewContainerRef,
-            };
-            this.filterButtonKeywordComponents.push(addedKeywordComponent);
-          }
+          const componentFactory = this.componentFactoryResolver.resolveComponentFactory(keywordComponentItem.keywordComponent);
+          const componentRef: ComponentRef<any> = filterButtonsViewContainerRef.createComponent<KeywordComponent>(componentFactory);
+          componentRef.instance.layer = layer;
         }
+
       }
     }
   }
 
-  /**
-   * Remove any keyword components that are associated with the provided CSW
-   * record, provided that no other active layer is associated with the
-   * same keyword
-   *
-   * @param cswRecord the CSW record being removed from the map/active layers list
-   */
-  public removeKeywordComponents(recordId: string) {
-    for (const addedComponent of this.mapWidgetKeywordComponents) {
-      addedComponent.cswRecordIds = addedComponent.cswRecordIds.filter((r) => r !== recordId);
-      if (addedComponent.cswRecordIds.length === 0) {
-        const index = this.mapWidgetKeywordComponents.indexOf(addedComponent);
-        this.mapWidgetViewContainerRef.remove(index);
-        this.mapWidgetKeywordComponents = this.mapWidgetKeywordComponents.filter(
-            (kc) => kc.keywordComponent !== addedComponent.keywordComponent);
-      }
-    }
-
-    for (let i = this.filterButtonKeywordComponents.length - 1; i >= 0; i--) {
-      if (this.filterButtonKeywordComponents[i].cswRecordIds.findIndex((r) => r === recordId) !== -1) {
-        this.filterButtonKeywordComponents[i].viewContainerRef.clear();
-        this.filterButtonKeywordComponents = this.filterButtonKeywordComponents.filter(
-            (kc) => kc.cswRecordIds.findIndex((r) => r === recordId) === -1);
-      }
-    }
-  }
 }

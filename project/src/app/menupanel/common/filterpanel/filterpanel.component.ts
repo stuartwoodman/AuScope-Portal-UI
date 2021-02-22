@@ -100,9 +100,7 @@ export class FilterPanelComponent implements OnInit {
     }
 
     // Keyword components
-    if (this.layer.cswRecords.length > 0) {
-      this.keywordComponentService.addFilterButtonKeywordComponents(this.layer.cswRecords[0], this.keywordButtonsViewContainer)
-    }
+    this.keywordComponentService.addFilterButtonKeywordComponents(this.layer, this.keywordButtonsViewContainer);
   }
 
   /**
@@ -186,7 +184,6 @@ export class FilterPanelComponent implements OnInit {
       }
       layer.wfsUrls.push(onlineResource.url);
     }
-    const me = this;
     try {
       this.olWMSService.getNvclFilter(layer, param).subscribe(response => {
         if (response.indexOf('<ogc:Intersects>') >= 0) {
@@ -194,7 +191,6 @@ export class FilterPanelComponent implements OnInit {
           // tslint:disable-next-line:max-line-length
           response = '<ogc:Filter xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\">' + ogcIntersects + '</ogc:Filter>';
         }
-        console.log(response);
         layer.ogcFilter = response;
       });
     } catch (error) {
