@@ -185,9 +185,12 @@ export class LayerPanelComponent implements OnInit {
         const me = this;
         this.manageStateService.getUnCompressedString(state, function(result) {
           const layerStateObj = JSON.parse(result);
+          /*
+          // TODO: Pending re-implementation of state
           if (!UtilitiesService.isEmpty(layerStateObj)) {
             me.manageStateService.resumeMapState(layerStateObj.map);
           }
+          */
           me.layerHandlerService.getLayerRecord().subscribe(
             response => {
               me.layerGroups = response;

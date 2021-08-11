@@ -66,8 +66,9 @@ export class QuerierModalComponent {
     return config.supportOpenInNewWindow.includes(doc.layer.id);
   }
 
+  // TODO: Pending re-implementation of state
   public newWindow(doc: QuerierInfoModel) {
-
+    /*
     const state = _.cloneDeep(this.manageStateService.getState());
     const layerid = doc.layer.id;
     for (const key in state) {
@@ -88,7 +89,7 @@ export class QuerierModalComponent {
       const permanentlink = environment.hostUrl + '?state=' + stateStr
       window.open(permanentlink);
     });
-
+    */
   }
 
 
