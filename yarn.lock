@@ -311,7 +311,7 @@
     "symbol-observable" "4.0.0"
     "uuid" "8.3.2"
 
-"@angular/common@^11.0.0 || ^12.0.0", "@angular/common@^12.0.0", "@angular/common@^13.0.0", "@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@^13.3.0", "@angular/common@>=10.0.0", "@angular/common@>=10.0.0 <13.0.0", "@angular/common@>=11.0.0", "@angular/common@>=12.0.0 <13.0.0", "@angular/common@>=13.1.1", "@angular/common@>=2.x", "@angular/common@>=7.0.0 <=13.0.0 || ^13.0.0", "@angular/common@>10.0.9", "@angular/common@13.3.0":
+"@angular/common@^11.0.0 || ^12.0.0", "@angular/common@^13.0.0", "@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@^13.3.0", "@angular/common@>=10.0.0", "@angular/common@>=10.0.0 <13.0.0", "@angular/common@>=11.0.0", "@angular/common@>=12.0.0 <13.0.0", "@angular/common@>=13.1.1", "@angular/common@>=2.x", "@angular/common@>=7.0.0 <=13.0.0 || ^13.0.0", "@angular/common@>10.0.9", "@angular/common@13.3.0":
   "integrity" "sha512-yl09TWBmz++Z3MKjzZIwU2wZHiedCn1DjGILjjNXegHFOfINRHiqLhHca4kGWFcTsdvcuEhd9Hk9JATqi45rjg=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-13.3.0.tgz"
   "version" "13.3.0"
@@ -373,7 +373,7 @@
   "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/core@^11.0.0 || ^12.0.0", "@angular/core@^12.0.0", "@angular/core@^13.0.0", "@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@^13.3.0", "@angular/core@>=10.0.0", "@angular/core@>=10.0.0 <13.0.0", "@angular/core@>=11.0.0", "@angular/core@>=12.0.0 <13.0.0", "@angular/core@>=13.1.1", "@angular/core@>=2.x", "@angular/core@>=7.0.0", "@angular/core@>=7.0.0 <=13.0.0 || ^13.0.0", "@angular/core@>10.0.9", "@angular/core@13.3.0":
+"@angular/core@^11.0.0 || ^12.0.0", "@angular/core@^13.0.0", "@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@^13.3.0", "@angular/core@>=10.0.0", "@angular/core@>=10.0.0 <13.0.0", "@angular/core@>=11.0.0", "@angular/core@>=12.0.0 <13.0.0", "@angular/core@>=13.1.1", "@angular/core@>=2.x", "@angular/core@>=7.0.0", "@angular/core@>=7.0.0 <=13.0.0 || ^13.0.0", "@angular/core@>10.0.9", "@angular/core@13.3.0":
   "integrity" "sha512-ZnuIMEK8YFBtthNqrxapYolMp6qRy4Yp/VG+M11YNiuBp/BoYYDjTaknwO8vu36Cn6372zWjcibsknkZMjdBkg=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-13.3.0.tgz"
   "version" "13.3.0"
@@ -385,7 +385,7 @@
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/forms@^11.0.0 || ^12.0.0", "@angular/forms@^12.0.0", "@angular/forms@^13.0.0 || ^14.0.0-0", "@angular/forms@^13.3.0", "@angular/forms@>=11.0.0", "@angular/forms@>=12.0.0 <13.0.0", "@angular/forms@>=13.1.1":
+"@angular/forms@^11.0.0 || ^12.0.0", "@angular/forms@^13.0.0", "@angular/forms@^13.0.0 || ^14.0.0-0", "@angular/forms@^13.3.0", "@angular/forms@>=11.0.0", "@angular/forms@>=12.0.0 <13.0.0", "@angular/forms@>=13.1.1":
   "integrity" "sha512-eBySo+B3/AV+p3SmD15Tg41N+SoxYPyqGnlCTR+jSrFis5ZZNWf0kKpIKhJhW2taRq6K+1o3KcA0W9bnphrZDQ=="
   "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-13.3.0.tgz"
   "version" "13.3.0"
@@ -397,7 +397,16 @@
   "resolved" "https://registry.npmjs.org/@angular/language-service/-/language-service-13.3.0.tgz"
   "version" "13.3.0"
 
-"@angular/localize@^12.0.0", "@angular/localize@^13.0.0 || ^13.3.0-rc.0", "@angular/localize@^13.3.0":
+"@angular/localize@^12.0.0":
+  "integrity" "sha512-peWauKtqy7XG5OiG9L4uLg/yIMw0b/ipKOiovzpuj+DCghmeuYzle5kjCLvWydFeQqBoIdf2kcJYeskrYCAHfQ=="
+  "resolved" "https://registry.npmjs.org/@angular/localize/-/localize-12.2.16.tgz"
+  "version" "12.2.16"
+  dependencies:
+    "@babel/core" "7.8.3"
+    "glob" "7.1.7"
+    "yargs" "^17.0.0"
+
+"@angular/localize@^13.0.0", "@angular/localize@^13.0.0 || ^13.3.0-rc.0", "@angular/localize@^13.3.0":
   "integrity" "sha512-6R5F9BHo9SkzPilRFVpHAtRyuzmuIDM94bBNfk9VrMOBM6yfl+oS+Y7bwIGvmlbk3EulBbt6Us8iLEh2nW0otA=="
   "resolved" "https://registry.npmjs.org/@angular/localize/-/localize-13.3.0.tgz"
   "version" "13.3.0"
@@ -471,7 +480,7 @@
 
 "@auscope/portal-core-ui@file:../portal-core-ui-app/dist/portal-core-ui":
   "resolved" "file:../portal-core-ui-app/dist/portal-core-ui"
-  "version" "1.0.16"
+  "version" "1.0.17"
   dependencies:
     "tslib" "^2.3.1"
 
@@ -1762,12 +1771,12 @@
   "resolved" "https://registry.npmjs.org/@mapbox/unitbezier/-/unitbezier-0.0.0.tgz"
   "version" "0.0.0"
 
-"@ng-bootstrap/ng-bootstrap@^10.0.0":
-  "integrity" "sha512-Sz+QaxjuyJYJ+zyUbf0TevgcgVesCPQiiFiggEzxKjzY5R+Hvq3YgryLdXf2r/ryePL+C3FXCcmmKpTM5bfczQ=="
-  "resolved" "https://registry.npmjs.org/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-10.0.0.tgz"
-  "version" "10.0.0"
+"@ng-bootstrap/ng-bootstrap@^12.0.1":
+  "integrity" "sha512-q0N1Pi032kfqHdoHEu9RqSdmN0ycSKmlg0b4YaqgOxNcOfuI9bH3oSejCttcYhe0q5SPB0IgVDJ6M0MrcKVi6Q=="
+  "resolved" "https://registry.npmjs.org/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-12.0.1.tgz"
+  "version" "12.0.1"
   dependencies:
-    "tslib" "^2.1.0"
+    "tslib" "^2.3.0"
 
 "@ng-select/ng-select@^7.4.0":
   "integrity" "sha512-Mn+gUA5KV2740zQHr4Zkc1tyTqeDE67tm4Cz4+miONWIPFP9KfxQ26goRDS8vT43zbDefalPQWH1thX+8NBRGg=="
@@ -1879,6 +1888,11 @@
   "integrity" "sha512-zZnksXtFBqvONcXWuAtSWrl3YXaDbU2ArRCCuzM42mP0GBJclD6e0GC3zEemmrjiMSOHcLPyRC4vOnAsnomJIw=="
   "resolved" "https://registry.npmjs.org/@petamoriken/float16/-/float16-3.6.2.tgz"
   "version" "3.6.2"
+
+"@popperjs/core@^2.10.2":
+  "integrity" "sha512-q/ytXxO5NKvyT37pmisQAItCFqA7FD/vNb8dgaJy3/630Fsc+Mz9/9f2SziBoIZ30TJooXyTwZmhi1zjXmObYg=="
+  "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.4.tgz"
+  "version" "2.11.4"
 
 "@schematics/angular@13.3.0":
   "integrity" "sha512-WND6DXWf0ZFefqlC2hUm1FzHDonRfGpDEPWVhVulhYkB7IUUaXuCz8K41HAScyJ3bxUngs2Lx9+4omikc05fxA=="
