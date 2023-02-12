@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { CSWRecordModel, OnlineResourceModel } from '@auscope/portal-core-ui';
 import { LayerModel } from '@auscope/portal-core-ui';
 import { LegendService } from '@auscope/portal-core-ui';
 import { UtilitiesService } from '@auscope/portal-core-ui';
+import { CesiumMapPreviewComponent } from '../cesiummappreview/cesium.preview.component';
 
 
 @Component({
@@ -16,12 +17,14 @@ export class InfoPanelSubComponent implements OnChanges {
     @Input() layer: LayerModel;
     @Input() expanded: boolean;
 
+    @ViewChild(CesiumMapPreviewComponent/*, { static: true }*/)
+    private previewMap: CesiumMapPreviewComponent;
+
     // These store the URL of the WMS preview and legend
     wmsUrl: any;
     legendUrl: any;
 
-    constructor(public legendService: LegendService) {
-    }
+    constructor(public legendService: LegendService) {}
 
     /**
      * Remove unwanted strings from metadata constraints fields
@@ -97,6 +100,12 @@ export class InfoPanelSubComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         // If this subpanel becomes expanded, then load up the legend and preview map
         if (changes.expanded.currentValue === true && !changes.expanded.previousValue) {
+
+            const wmsOnlineResource = this.cswRecord.onlineResources.find(r => r.type === 'WMS');
+            if (wmsOnlineResource) {
+                this.previewMap.addLayer(this.layer, wmsOnlineResource);
+            }
+
             const me = this;
             if (this.layer.proxyStyleUrl && this.layer.proxyStyleUrl.length > 0) {
                 this.legendService.getLegendStyle(this.layer.proxyStyleUrl).subscribe(

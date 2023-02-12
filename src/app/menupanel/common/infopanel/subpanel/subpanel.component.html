@@ -17,9 +17,7 @@
 		<a *ngIf="!isGetCapabilitiesType(onlineResource)" target="_blank" href="{{ onlineResource.url }}">{{onlineResource.type}} Info</a>
 	</p>
 </div>
-<p *ngIf="wmsUrl!=undefined">
-	<b>WMS Preview: </b><img appImgLoading src="{{wmsUrl}}" height="100" width="100"/>
-</p>
+<app-cesium-preview-map [layer]="layer"></app-cesium-preview-map>
 <p *ngIf="legendUrl!=undefined">
 	<b>Legend: </b><img appImgLoading src="{{legendUrl}}" class="infopanel-legend"/>
 </p>
