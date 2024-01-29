@@ -202,4 +202,14 @@ export class ActiveLayersPanelComponent {
     }
   }
 
+  /**
+   * Briefly display the layer bounds on the map, and zoom to the bounds if requested
+   *
+   * @param layer the layer
+   * @paramm zoomToLayer zoom to layer if true
+   */
+  showLayerBounds(layer: LayerModel, zoomToLayer: boolean) {
+    this.csMapService.showLayerBounds(layer, zoomToLayer);
+  }
+
 }
